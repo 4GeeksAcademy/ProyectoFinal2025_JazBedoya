@@ -4,7 +4,7 @@ from flask_jwt_extended import   JWTManager, create_access_token, jwt_required, 
 
 def register_user_routes(app):
 
-    @app.route("/users", methods=["GET", "POST"])
+    @app.route("/users", methods= [ "GET" ,"POST"])
     def get_or_add_user():
         if request.method == "GET":
             result = User.query.all()

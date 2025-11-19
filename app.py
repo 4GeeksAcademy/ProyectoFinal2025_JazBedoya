@@ -2,6 +2,8 @@ from flask import Flask
 from models import db
 from users_routes import register_user_routes
 from ganado_routes import register_ganado_routes
+from carrito_routes import register_carrito_routes
+from order_routes import register_order_routes
 from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
@@ -18,6 +20,8 @@ jwt = JWTManager(app)
 # Registrar rutas
 register_user_routes(app)
 register_ganado_routes(app)
+register_carrito_routes(app)
+register_order_routes(app)
 
 if __name__ == "__main__":
     with app.app_context():
