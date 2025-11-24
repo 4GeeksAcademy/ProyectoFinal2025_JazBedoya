@@ -4,11 +4,10 @@ const Signup = () => {
     //Estados para los inputs
     // cada uno tiene su funcion para actualizar
 
-    const [name, setname] = useState("");
-    const [email, setemail] =  useState("");
-    const[password,setpassword] = useState("");
-    const [loading, setLoading] = useState(false)
-
+     const [name, setName] = useState("");        
+     const [email, setEmail] = useState("");      
+     const [password, setPassword] = useState(""); 
+     const [loading, setLoading] = useState(false);
      //async porque voy a usar fecth
     const signupUser = async (e) =>{
         e.preventDefault();
