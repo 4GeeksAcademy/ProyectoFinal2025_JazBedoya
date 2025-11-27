@@ -1,57 +1,54 @@
 import React, { useEffect, useState } from "react";
 
 export default function Carrito() {
-  const [carrito, setCarrito] = useState({ items: [], total: 0 });
+  const [carrito, setCarrito] = useState({ items: [], total: 0 }); //Items: lista de lotes en el carrito, total:suma total de todos los lotes
 
+  //Cuando el componente se carga por primera vez llama al cargarCarrito, se ejecuta una vez
   useEffect(() => {
     cargarCarrito();
   }, []);
 
-  // ---------------------------
-  // CARGAR CARRITO DEL BACKEND
-  // ---------------------------
   const cargarCarrito = () => {
-    const token = localStorage.getItem("jwt-token");
+    const token = localStorage.getItem("jwt-token"); //agarra el token del usuario para autorizar
 
+    //Hace un GET al carrito
     fetch("http://127.0.0.1:5000/carrito", {
       headers: { "Authorization": "Bearer " + token }
     })
       .then(resp => resp.json())
-      .then(data => setCarrito(data));
+      .then(data => setCarrito(data)); //setCarrito actualiza el estado
   };
 
-  // ---------------------------
-  // ACTUALIZAR CANTIDAD
-  // ---------------------------
+  //Actuliza la cantidas
   const cambiarCantidad = (id, nuevaCantidad) => {
-    if (nuevaCantidad < 1) return;
+    if (nuevaCantidad < 1) return;  //no permite cantidas menores a uno
 
-    const token = localStorage.getItem("jwt-token");
+    const token = localStorage.getItem("jwt-token"); 
 
     fetch(`http://127.0.0.1:5000/carrito/${id}`, {
-      method: "PUT",
+      method: "PUT", //envia un PUT al backend con la cantidasd
       headers: {
         "Authorization": "Bearer " + token,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ quantity: nuevaCantidad })
+      body: JSON.stringify({ quantity: nuevaCantidad }) // se vueleve a cargar para mostrar el nuevo total
     })
       .then(resp => resp.json())
       .then(() => cargarCarrito());
   };
 
-  // ---------------------------
-  // ELIMINAR ITEM
-  // ---------------------------
+  
+
+   //Eliminar un item con el id
   const eliminarItem = (id) => {
     const token = localStorage.getItem("jwt-token");
 
     fetch(`http://127.0.0.1:5000/carrito/${id}`, {
-      method: "DELETE",
+      method: "DELETE", // el backend borra ese elemento
       headers: { "Authorization": "Bearer " + token }
     })
       .then(resp => resp.json())
-      .then(() => cargarCarrito());
+      .then(() => cargarCarrito()); // se recarga el carrito inmediatamente
   };
 
   return (
@@ -131,9 +128,10 @@ export default function Carrito() {
 
           {/* ICONOS DE TARJETAS */}
           <div className="d-flex gap-3 mt-3 mb-3">
-            <img src="/cards/visa.png" alt="Visa" style={{ height: "35px" }} />
-            <img src="/cards/mastercard.png" alt="Mastercard" style={{ height: "35px" }} />
-            <img src="/cards/maestro.png" alt="Maestro" style={{ height: "35px" }} />
+          
+            <img src="/public/visa1.png" alt="Visa" style={{ height: "15px" }} />
+            <img src="/public/mastercard1.png" alt="Mastercard" style={{ height: "20px" }} />
+          {/* <img src="/public/ueno.png" alt="Maestro" style={{ height: "35px" }} />*/}
           </div>
 
           <button className="btn btn-success w-100 py-2">
