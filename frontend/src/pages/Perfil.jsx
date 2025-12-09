@@ -24,7 +24,10 @@ export default function Perfil() {
       .then((resp) => resp.json())
       .then((data) => {
         setUser(data);
-        return fetch(import.meta.env.VITE_BACKEND_URL + "/ganado?vendedor_id=${data.id}");
+        return fetch(`${import.meta.env.VITE_BACKEND_URL}/ganado?vendedor_id=${data.id}`);
+        
+
+
       })
       .then((resp) => resp.json())
       .then((data) => setGanado(Array.isArray(data) ? data : []))

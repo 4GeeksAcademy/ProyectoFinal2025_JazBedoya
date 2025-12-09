@@ -9,7 +9,8 @@ export default function Catalogo() {
   useEffect(() => {
     const fetchGanado = async () => {
       try {
-        const resp = await fetch(import.meta.env.VITE_BACKEND_URL + "./ganado");
+        const resp = await fetch(import.meta.env.VITE_BACKEND_URL + "/ganado");
+
 
         if (!resp.ok) throw new Error("Error al cargar el catálogo");
 

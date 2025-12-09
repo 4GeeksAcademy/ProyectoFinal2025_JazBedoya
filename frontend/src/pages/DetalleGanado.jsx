@@ -10,7 +10,8 @@ export default function DetalleGanado() {
   //Trae del backend los detalles del ganado
   const cargarGanado = async () => {
     try {
-      const resp = await fetch(import.meta.env.VITE_BACKEND_URL + "/ganado/${id}"); //fecth a la API usando el id
+       fetch(`${import.meta.env.VITE_BACKEND_URL}/ganado`);
+    //fecth a la API usando el id
       const data = await resp.json(); //Convierte respuesta en JSON
       setGanado(data); //guarda los datos en ganado
     } catch (err) {
